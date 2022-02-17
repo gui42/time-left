@@ -37,9 +37,9 @@ def tempo(name, hour, minutes, fast, shout):
         confirmation = True
 
     if confirmation:
-        time_now = "{0}:{1:0>2}".format(now.hour, now.minute)
-        time_now_format = click.style(time_now, fg="red", bold=True)
-        click.echo(time_now_format)
+        #time_now = "{0}:{1:0>2}".format(now.hour, now.minute)
+        #time_now_format = click.style(time_now, fg="red", bold=True)
+        #click.echo(time_now_format)
         then = now.replace(hour=hour, minute=minutes)
         if now > then:
             extra_time = now - then
