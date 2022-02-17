@@ -1,9 +1,17 @@
 from datetime import datetime
+from random import randint
 import os
 import click
 
 
 @click.command()
+@click.option(
+    "--quote",
+    "--q",
+    help="Shows you a motivacional message at the end!",
+    is_flag=True,
+    default=False,
+)
 @click.option("--name", "--n", help="Your name", default="user", type=str)
 @click.option(
     "--hour",
@@ -12,7 +20,9 @@ import click
     default=18,
     type=click.IntRange(0, 23, clamp=True),
 )
-@click.option("--fast", "--f", "-f", is_flag=True)
+@click.option(
+    "--fast", "--f", is_flag=True, help="Does not prompt the user for confirmation"
+)
 @click.option(
     "--minutes",
     "--m",
@@ -23,7 +33,7 @@ import click
 @click.option(
     "--shout/--no-shout", help="everything gets upper case!", default=False, type=bool
 )
-def tempo(name, hour, minutes, fast, shout):
+def tempo(name, hour, minutes, fast, shout, quote):
     """Calculates how long before a momment, Defaults to how long till 6'clock"""
     error_message = click.style("cannot", fg="red", underline=True)
     if name == "user":
@@ -56,11 +66,31 @@ def tempo(name, hour, minutes, fast, shout):
             click.echo(remaning_string)
     else:
         click.secho(f"Wise of you", fg="red", bg="white", blink=True)
+    if quote:
+        show_quote()
 
 
 def get_username():
     user_name = os.getlogin()
     return user_name
+
+
+def show_quote():
+    with click.open_file("quotes/quotes.txt", mode="r") as r:
+        line_array = r.read().splitlines()
+        len_lines = len(line_array) - 1
+        random_number = randint(0, len_lines)
+        fg = randint(100, 150)
+        bg = randint(20, 80)
+        quote = click.style(
+            line_array[random_number],
+            fg=fg,
+            bg=bg,
+            bold=True,
+            underline=True,
+            italic=True,
+        )
+        click.echo(quote)
 
 
 if __name__ == "__main__":
