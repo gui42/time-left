@@ -37,10 +37,9 @@ def tempo(name, hour, minutes, fast, shout):
     click.echo(time)
     now = datetime.now()
 
+    confirmation = True
     if not fast:
         confirmation = click.confirm("Do you really want to know?", default=True)
-    else:
-        confirmation = True
 
     if confirmation:
         then = now.replace(hour=hour, minute=minutes)
