@@ -81,11 +81,9 @@ def show_quote():
         len_lines = len(line_array) - 1
         random_number = randint(0, len_lines)
         fg = randint(100, 150)
-        bg = randint(20, 80)
         quote = click.style(
             line_array[random_number],
             fg=fg,
-            bg=bg,
             bold=True,
             underline=True,
             italic=True,
