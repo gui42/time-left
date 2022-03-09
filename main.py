@@ -60,7 +60,7 @@ def tempo(name, hour, minutes, fast, shout, quote):
             remaning = then - now
             remaning = style_remaining_time(remaning)
             to_time = f"{then.hour:0>2}:{then.minute:0>2}"
-            to_time = click.style(to_time, fg='yellow')
+            to_time = click.style(to_time, fg="yellow")
             remaning_string = click.style(
                 f"{remaning} to {to_time}!",
                 fg="white",
@@ -80,6 +80,7 @@ def get_username():
 
 
 def show_quote():
+    """Selects a random quote to show"""
     with click.open_file("quotes/quotes.txt", mode="r") as r:
         line_array = r.read().splitlines()
         len_lines = len(line_array) - 1
@@ -96,6 +97,7 @@ def show_quote():
 
 
 def style_remaining_time(time):
+    """Changes the color of the remaining time"""
     if time.total_seconds() < 900:
         return click.style(time, fg="green")
     else:
