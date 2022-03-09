@@ -58,10 +58,14 @@ def tempo(name, hour, minutes, fast, shout, quote):
             click.echo(f"{then.hour:0>2}:{then.minute:0>2} was {extra_time} ago")
         else:
             remaning = then - now
+            remaning = style_remaining_time(remaning)
+            to_time = f"{then.hour:0>2}:{then.minute:0>2}"
+            to_time = click.style(to_time, fg='yellow')
             remaning_string = click.style(
-                f"{remaning} to {then.hour:0>2}:{then.minute:0>2}!",
+                f"{remaning} to {to_time}!",
                 fg="white",
                 bold=True,
+                reset=True,
             )
             click.echo(remaning_string)
     else:
@@ -89,6 +93,13 @@ def show_quote():
             italic=True,
         )
         click.echo(quote)
+
+
+def style_remaining_time(time):
+    if time.total_seconds() < 900:
+        return click.style(time, fg="green")
+    else:
+        return click.style(time, fg="red")
 
 
 if __name__ == "__main__":
