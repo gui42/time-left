@@ -39,7 +39,7 @@ def tempo(name, hour, minutes, fast, shout, quote):
     if name == "user":
         name = get_username()
 
-    string = f"Time is as ilusion {name.title()}"
+    string = f"Time is an ilusion {name.title()}"
     if shout:
         string = string.upper()
     time = click.style(string, fg=80)
